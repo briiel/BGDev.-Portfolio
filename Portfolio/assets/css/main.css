@@ -16,6 +16,11 @@
   --snd-bg-color: #40534c;
   --text-color: #f8eded;
   --main-color: #677d6a;
+
+  --duration: 1.5s;
+	--container-size: 250px;
+	--box-size: 33px;
+	--box-border-radius: 15%;
 }
 
 html {
@@ -186,6 +191,8 @@ span {
   margin: 2rem 0 3rem;
 }
 
+/*SERVICES CSS*/
+
 .services h2 {
   margin-bottom: 5rem;
 }
@@ -226,6 +233,8 @@ span {
   font-size: 1.6rem;
   margin: 1rem 0 3rem;
 }
+
+/*CONTACT CSS*/
 
 .contact h2 {
   margin-bottom: 3rem;
@@ -277,6 +286,8 @@ textarea::placeholder {
   background: var(--snd-bg-color);
 }
 
+/*FOOTER CSS*/
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -294,6 +305,7 @@ textarea::placeholder {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+  display: flex; /* Ensure flexbox for centering */
   justify-content: center;
   align-items: center;
   padding: 0.8rem 1rem;
@@ -301,13 +313,258 @@ textarea::placeholder {
   border-radius: 0.8rem;
   transition: 0.5s ease;
   z-index: 100;
+  text-decoration: none; /* Remove underline from link */
 }
 
-.footer-iconTop a:hover {
+.footer-iconTop:hover {
   box-shadow: 0 0 1rem var(--main-color);
 }
 
-.footer-iconTop a i {
+.footer-iconTop i {
   font-size: 2.4rem;
   color: var(--bg-color);
 }
+
+/*LOADER CSS*/
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000; /* ensure it's on top of everything */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  transition: opacity 0.5s;
+}
+
+.loader.show {
+  opacity: 1;
+}
+
+/* Add this to hide the main content initially */
+.main-content {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.loaded {
+  .main-content {
+    opacity: 1;
+  }
+}
+
+.box {
+  width: var(--box-size);
+  height: var(--box-size);
+  position: relative;
+  display: block;
+  transform-origin: -50% center;
+  border-radius: var(--box-border-radius);
+  margin: 1rem;
+}
+
+.box::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--main-color);
+  border-radius: var(--box-border-radius);
+  box-shadow: 0px 0px 20px 0px var(--snd-bg-color);
+}
+
+.box:nth-child(1) {
+  animation: slide var(--duration) ease-in-out infinite alternate;
+}
+
+.box:nth-child(1)::after {
+  animation: color-change var(--duration) ease-in-out infinite alternate;
+  background-color: var(--text-color);
+}
+
+.box:nth-child(2) {
+  animation: flip-1 var(--duration) ease-in-out infinite alternate;
+}
+
+.box:nth-child(2)::after {
+  animation: squidge-1 var(--duration) ease-in-out infinite alternate;
+  background-color: var(--text-color);
+}
+
+.box:nth-child(3) {
+  animation: flip-2 var(--duration) ease-in-out infinite alternate;
+}
+
+.box:nth-child(3)::after {
+  animation: squidge-2 var(--duration) ease-in-out infinite alternate;
+  background-color: var(--text-color);
+}
+
+.box:nth-child(4) {
+  animation: flip-3 var(--duration) ease-in-out infinite alternate;
+}
+
+.box:nth-child(4)::after {
+  animation: squidge-3 var(--duration) ease-in-out infinite alternate;
+  background-color: var(--text-color);
+}
+
+.box:nth-child(5) {
+  animation: flip-4 var(--duration) ease-in-out infinite alternate;
+}
+
+.box:nth-child(5)::after {
+  animation: squidge-4 var(--duration) ease-in-out infinite alternate;
+  background-color: var(--text-color);
+}
+
+@keyframes slide {
+  0% {
+    background-color: var(--text-color);
+    transform: translateX(0vw);
+  }
+  100% {
+    background-color: var(--text-color);
+    transform: translateX(calc(var(--container-size) - (var(--box-size) * 1.25)));
+  }
+}
+
+@keyframes color-change {
+  0% {
+    background-color: var(--text-color);
+  }
+  100% {
+    background-color: var(--text-color);
+  }
+}
+
+@keyframes flip-1 {
+  0%, 15% {
+    transform: rotate(0);
+  }
+  35%, 100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes squidge-1 {
+  5% {
+    transform-origin: center bottom;
+    transform: scaleX(1) scaleY(1);
+  }
+  15% {
+    transform-origin: center bottom;
+    transform: scaleX(1.3) scaleY(0.7);
+  }
+  25%, 30% {
+    transform-origin: center bottom;
+    transform: scaleX(0.8) scaleY(1.4);
+  }
+  50%, 100% {
+    transform-origin: center top;
+    transform: scaleX(1) scaleY(1);
+  }
+  40% {
+    transform-origin: center top;
+    transform: scaleX(1.3) scaleY(0.7);
+  }
+}
+
+@keyframes flip-2 {
+  0%, 30% {
+    transform: rotate(0);
+  }
+  50%, 100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes squidge-2 {
+  20% {
+    transform-origin: center bottom;
+    transform: scaleX(1) scaleY(1);
+  }
+  35% {
+    transform-origin: center bottom;
+    transform: scaleX(1.3) scaleY(0.7);
+  }
+  45%, 50% {
+    transform-origin: center bottom;
+    transform: scaleX(0.8) scaleY(1.4);
+  }
+  70%, 100% {
+    transform-origin: center top;
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+@keyframes flip-3 {
+  0%, 45% {
+    transform: rotate(0);
+  }
+  65%, 100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes squidge-3 {
+  30% {
+    transform-origin: center bottom;
+    transform: scaleX(1) scaleY(1);
+  }
+  45% {
+    transform-origin: center bottom;
+    transform: scaleX(1.3) scaleY(0.7);
+  }
+  55%, 60% {
+    transform-origin: center bottom;
+    transform: scaleX(0.8) scaleY(1.4);
+  }
+  80%, 100% {
+    transform-origin: center top;
+    transform: scaleX(1) scaleY(1);
+  }
+  70% {
+    transform-origin: center top;
+    transform: scaleX(1.3) scaleY(0.7);
+  }
+}
+
+@keyframes flip-4 {
+  0%, 60% {
+    transform: rotate(0);
+  }
+  80%, 100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes squidge-4 {
+  40% {
+    transform-origin: center bottom;
+    transform: scaleX(1) scaleY(1);
+  }
+  55% {
+    transform-origin: center bottom;
+    transform: scaleX(1.3) scaleY(0.7);
+  }
+  65%, 70% {
+    transform-origin: center bottom;
+    transform: scaleX(0.8) scaleY(1.4);
+  }
+  90%, 100% {
+    transform-origin: center top;
+    transform: scaleX(1) scaleY(1);
+  }
+  80% {
+    transform-origin: center top;
+    transform: scaleX(1.3) scaleY(0.7);
+  }
+}
+

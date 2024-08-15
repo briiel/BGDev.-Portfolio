@@ -12,7 +12,6 @@ ScrollReveal().reveal(
 );
 ScrollReveal().reveal(".home-contact h1, .about-img", { origin: "left" });
 ScrollReveal().reveal(".home-contact p, .about-content", { origin: "right" });
-ScrollReveal().reveal(".footer-iconTop", { origin: "bottom", delay: 100 });
 
 /*Typed Js*/
 const typed = new Typed(".multiple-text", {
@@ -24,29 +23,42 @@ const typed = new Typed(".multiple-text", {
 });
 
 /*footer-iconTop JS*/
-/*footer-iconTop JS*/
-document.addEventListener("DOMContentLoaded", () => {
-  const homeSection = document.getElementById("home");
-  const footerIconTop = document.querySelector(".footer-iconTop");
+document.addEventListener("DOMContentLoaded", function () {
+  const footerIconTop = document.querySelector('.footer-iconTop');
 
-  if (
-    homeSection.offsetTop <= window.scrollY &&
-    window.scrollY < homeSection.offsetTop + homeSection.offsetHeight
-  ) {
-    footerIconTop.style.opacity = 0;
+  function updateIconVisibility() {
+      const isHomeSection = window.location.hash === "" || window.location.hash === "#home";
+      const isScrolled = window.scrollY > 100;
+
+      footerIconTop.style.display = (isHomeSection && !isScrolled) ? 'none' : 'block';
   }
+
+  // Initial check on page load
+  updateIconVisibility();
+
+  // Update icon visibility on hash change and scroll
+  window.addEventListener("hashchange", updateIconVisibility);
+  window.addEventListener("scroll", updateIconVisibility);
 });
 
-window.addEventListener("scroll", () => {
-  const homeSection = document.getElementById("home");
-  const footerIconTop = document.querySelector(".footer-iconTop");
 
-  if (
-    homeSection.offsetTop <= window.scrollY &&
-    window.scrollY < homeSection.offsetTop + homeSection.offsetHeight
-  ) {
-    footerIconTop.style.opacity = 0;
-  } else {
-    footerIconTop.style.opacity = 1;
-  }
+
+/*Loader*/
+document.addEventListener("DOMContentLoaded", function() {
+
+  document.body.classList.add("no-scroll");
+  
+  // show loader initially
+  document.getElementById("loader").classList.add("show");
+
+  // hide loader after 5 seconds
+  setTimeout(function() {
+    document.getElementById("loader").style.opacity = 0;
+  }, 3000);
+
+  // show main content after loader is hidden
+  setTimeout(function() {
+    document.getElementById("loader").remove();
+    document.body.classList.add("loaded");
+  }, 3000);
 });
