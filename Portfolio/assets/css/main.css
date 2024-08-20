@@ -13,12 +13,12 @@
 
 :root {
 
-  --bg-color1: #f8eded;
+  --bg-color1: #F9F6EE;
   --snd-bg-color1: #76ABAE;
   --text-color1: #222831;
   --main-color1: #31363F;
   
-  --text-color: #f8eded;
+  --text-color: #F9F6EE;
 
   --duration: 1.5s;
 	--container-size: 250px;
